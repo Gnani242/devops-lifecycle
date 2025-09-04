@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DevOps Lifecycle – Visual Diagram</title>
+  <style>
+    :root{
+      --bg:#0b1020; --card:#121735; --ink:#e8ecff; --muted:#a8b0d9; --accent:#8aa8ff; --line:#39406a;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial; color:var(--ink); background:radial-gradient(1200px 800px at 80% -10%, #1a214a 0%, #0b1020 60%);} 
+    .wrap{max-width:1100px; margin:40px auto; padding:24px}
+    h1{margin:0 0 6px; font-weight:800; letter-spacing:.2px}
+    .sub{color:var(--muted); margin-bottom:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02)); border:1px solid #1f264c; border-radius:20px; box-shadow:0 12px 30px rgba(0,0,0,.35); overflow:hidden}
+    .pad{padding:18px 20px}
+    .legend{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px; margin-top:10px}
+    .tag{display:flex; align-items:center; gap:8px; background:#0d1330; border:1px solid #232a54; border-radius:12px; padding:8px 10px}
+    .dot{width:10px; height:10px; border-radius:99px; background:var(--accent); box-shadow:0 0 0 2px rgba(138,168,255,.25)}
+    .muted{color:var(--muted); font-size:13px}
+    .footer{font-size:12px; color:var(--muted); text-align:center; margin-top:18px}
+    a{color:#b8c7ff}
+    /* Small helpers */
+    .sr{position:absolute; left:-9999px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>DevOps Lifecycle</h1>
+    <div class="sub">Plan → Develop → Build → Test → Release → Deploy → Operate → Monitor → (feedback back to Plan)</div>
+
+    <div class="card">
+      <div class="pad">
+        <!-- Responsive SVG: 8 nodes arranged in a loop with arrows -->
+        <svg viewBox="0 0 920 520" role="img" aria-labelledby="title desc" width="100%" height="auto">
+          <title id="title">DevOps Lifecycle Diagram</title>
+          <desc id="desc">Eight stages connected with arrows showing continuous feedback.</desc>
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)"/>
+            </marker>
+            <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.35"/>
+            </filter>
+          </defs>
+
+          <!-- Circle guide (invisible) -->
+          <circle cx="460" cy="260" r="190" fill="none" stroke="var(--line)" stroke-dasharray="4 8" opacity="0.35"/>
+
+          <!-- Connections (arcs) -->
+          <g stroke="var(--accent)" stroke-width="2.2" fill="none" marker-end="url(#arrow)" opacity="0.9">
+            <!-- We'll draw short curved paths between successive nodes -->
+            <path d="M160,260 C160,150 260,90 370,90"/>
+            <path d="M550,90 C660,90 760,150 760,260"/>
+            <path d="M760,260 C760,370 660,430 550,430"/>
+            <path d="M370,430 C260,430 160,370 160,260"/>
+            <!-- Short hops between top, right, bottom, left halves -->
+            <path d="M370,90 C415,80 505,80 550,90"/>
+            <path d="M760,260 C770,305 770,215 760,260" opacity="0"/>
+            <path d="M550,430 C505,440 415,440 370,430"/>
+            <path d="M160,260 C150,215 150,305 160,260" opacity="0"/>
+          </g>
+
+          <!-- Stage node component as groups -->
+          <g font-family="inherit" text-anchor="middle">
+            <!-- Helper function via copy-paste: each node is a rounded rect with a title and note -->
+            
+            <!-- PLAN -->
+            <g transform="translate(260,60)" filter="url(#soft)">
+              <rect x="-85" y="-30" rx="14" ry="14" width="170" height="60" fill="var(--card)" stroke="#2a3366"/>
+              <text x="0" y="-4" font-size="18" font-weight="700">Plan</text>
+              <text x="0" y="16" font-size="12" fill="var(--muted)">Requirements • Roadmap</text>
+            </g>
+
+            <!-- DEVELOP -->
+            <g transform="translate(460,40)" filter="url(#soft)">
+              <rect x="-85" y="-30" rx="14" ry="14" width="170" height="60" fill="var(--card)" stroke="#2a3366"/>
+              <text x="0" y="-4" font-size="18" font-weight="700">Develop</text>
+              <text x="0" y="16" font-size="12" fill="var(--muted)">Code • Review • Branch</text>
+            </g>
+
+            <!-- BUILD -->
+            <g transform="translate(660,60)" filter="url(#soft)">
+              <rect x="-85" y="-30" rx="14" ry="14" width="170" height="60" fill="var(--card)" stroke="#2a3366"/>
+              <text x="0" y="-4" font-size="18" font-weight="700">Build</text>
+              <text x="0" y="16" font-size="12" fill="var(--muted)">CI • Compile • Package</text>
+            </g>
+
+            <!-- TEST -->
+            <g transform="translate(820,260)" filter="url(#soft)">
+              <rect x="-85" y="-30" rx="14" ry="14" width="170" height="60" fill="var(--card)" stroke="#2a3366"/>
+              <text x="0" y="-4" font-size="18" font-weight="700">Test</text>
+              <text x="0" y="16" font-size="12" fill="var(--muted)">Unit • Integration • QA</text>
+            </g>
+
+            <!-- RELEASE -->
+            <g transform="translate(660,460)" filter="url(#soft)">
+              <rect x="-85" y="-30" rx="14" ry="14" width="170" height="60" fill="var(--card)" stroke="#2a3366"/>
+              <text x="0" y="-4" font-size="18" font-weight="700">Release</text>
+              <text x="0" y="16" font-size="12" fill="var(--muted)">Version • Approvals</text>
+            </g>
+
+            <!-- DEPLOY -->
+            <g transform="translate(460,480)" filter="url(#soft)">
+              <rect x="-85" y="-30" rx="14" ry="14" width="170" height="60" fill="var(--card)" stroke="#2a3366"/>
+              <text x="0" y="-4" font-size="18" font-weight="700">Deploy</text>
+              <text x="0" y="16" font-size="12" fill="var(--muted)">CD • Blue/Green • Rollout</text>
+            </g>
+
+            <!-- OPERATE -->
+            <g transform="translate(260,460)" filter="url(#soft)">
+              <rect x="-85" y="-30" rx="14" ry="14" width="170" height="60" fill="var(--card)" stroke="#2a3366"/>
+              <text x="0" y="-4" font-size="18" font-weight="700">Operate</text>
+              <text x="0" y="16" font-size="12" fill="var(--muted)">Run • SRE • Reliability</text>
+            </g>
+
+            <!-- MONITOR -->
+            <g transform="translate(100,260)" filter="url(#soft)">
+              <rect x="-85" y="-30" rx="14" ry="14" width="170" height="60" fill="var(--card)" stroke="#2a3366"/>
+              <text x="0" y="-4" font-size="18" font-weight="700">Monitor</text>
+              <text x="0" y="16" font-size="12" fill="var(--muted)">Logs • Metrics • Alerts</text>
+            </g>
+          </g>
+
+          <!-- Feedback arrow back to PLAN -->
+          <path d="M120,260 C120,150 220,90 260,90" stroke="var(--accent)" stroke-width="2.2" fill="none" marker-end="url(#arrow)"/>
+        </svg>
+
+        <div class="legend">
+          <div class="tag"><span class="dot"></span><div><strong>Continuous</strong><div class="muted">Arrows indicate the loop from Monitor back to Plan.</div></div></div>
+          <div class="tag"><span class="dot"></span><div><strong>Automation</strong><div class="muted">CI/CD, testing, and deployments are automated.</div></div></div>
+          <div class="tag"><span class="dot"></span><div><strong>Feedback</strong><div class="muted">Production signals drive planning & fixes.</div></div></div>
+          <div class="tag"><span class="dot"></span><div><strong>Collaboration</strong><div class="muted">Dev + Ops share tools, ownership, SLAs.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer">Made for Experiment 15 • Single-file HTML • Works offline</p>
+  </div>
+</body>
+</html>
